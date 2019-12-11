@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends React.Component{
+  state={
+    string:"asd",
+    isLoading:false,
+    problems:null
+  }
+  componentDidMount(){
+    axios.get('http://127.0.0.1:8000/problems').then(res=>{
+    console.log("res",res.data);  
+    this.setState({problems:res.data})
+    this.setState({isLoading:true})
+    }).catch(e=>console.error(e))
+  }
+  render(){
+    if(this.state.isLoading){
+      let list = this.state.problems.map(item=>{
+      return (<div key={item.id}>id=>{item.id}--{item.title}--{item.description}</div>)
+      })
+      return(<div>{list}</div>)
+    }else{
+      return("loading")
+    }
+  }
+
+} 
 
 export default App;
