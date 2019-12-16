@@ -2,6 +2,7 @@ version: '3'
 services:
     web:
         build: .
+        container_name: kib-frontend
         command: yarn start
         volumes:
             - .:/app

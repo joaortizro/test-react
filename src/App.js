@@ -9,7 +9,8 @@ class App extends React.Component{
     problems:null
   }
   componentDidMount(){
-    axios.get('http://127.0.0.1:8000/problems').then(res=>{
+    let local = 'http://127.0.0.1:8000/problems'
+    axios.get('https://rocky-everglades-25887.herokuapp.com/problems').then(res=>{
     console.log("res",res.data);  
     this.setState({problems:res.data})
     this.setState({isLoading:true})
