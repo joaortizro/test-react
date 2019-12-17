@@ -1,7 +1,8 @@
-FROM node:12
+FROM nginx
 
-WORKDIR /app
-ADD package.json /app
-RUN yarn
+COPY ./build/ /usr/share/nginx/html
+EXPOSE 80
+
+CMD nginx -g daemon off
 
 
