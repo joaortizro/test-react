@@ -1,21 +1,28 @@
+#version: '3'
+#services:
+#    web:
+#        build: .
+#        container_name: kib-frontend
+#        command: yarn start
+#        volumes:
+#            - ./default-conf:/etc/nginx/conf.d/default
+#        ports: 
+#            - "80:80"
+#        depends_on: 
+#            - api
+#    api:
+#        build: ../djangoRestTest
+#        container_name: kib-api
+#        ports:
+#            - "10443:10443"
+#        env_file: 
+#            - ../djangoRestTest/.env
+
 version: '3'
-services:
+services: 
     web:
         build: .
         container_name: kib-frontend
-        command: yarn start
-        volumes:
-            - ./default-conf:/etc/nginx/conf.d/default
-        ports: 
-            - "80:80"
-        depends_on: 
-            - api
-    api:
-        build: ../djangoRestTest
-        container_name: kib-api
+        command: nginx -g "daemon off;"
         ports:
-            - "10443:10443"
-        env_file: 
-            - ../djangoRestTest/.env
-
-        
+            - "80:80"
